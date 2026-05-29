@@ -40,9 +40,26 @@ body {
   transition: transform 0.2s ease, background 0.2s ease;
 }
 
+.button.secondary {
+  background: #64748b;
+}
+
+.button.secondary:hover {
+  background: #94a3b8;
+  transform: translateY(-2px);
+}
+
 .button:hover {
   background: #818cf8;
   transform: translateY(-2px);
+}
+
+.button-row {
+  display: inline-flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1rem;
 }
 
 .container {

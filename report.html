@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Report CNN Klasifikasi Gambar</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-content">
+      <h1>Report Project CNN Klasifikasi Gambar</h1>
+      <p>Ismat Yulian — Pertemuan 15 — Machine Learning</p>
+      <a class="button" href="https://github.com/Mas-is/cnn-klasifikasi-gambar" target="_blank" rel="noreferrer">Lihat Repository</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <section>
+      <h2>Ringkasan</h2>
+      <p>Project ini adalah implementasi Convolutional Neural Network (CNN) untuk klasifikasi gambar hewan. Dataset terdiri dari 8 kelas: <strong>cane</strong>, <strong>cavallo</strong>, <strong>elefante</strong>, <strong>farfalla</strong>, <strong>gallina</strong>, <strong>gatto</strong>, <strong>mucca</strong>.</p>
+      <p>Skrip utama meliputi <code>train_cnn.py</code> untuk pelatihan model, <code>predict.py</code> untuk prediksi gambar tunggal, dan <code>cnn-animals.ipynb</code> sebagai notebook analisis dan visualisasi.</p>
+    </section>
+
+    <section>
+      <h2>Hasil Pelatihan</h2>
+      <div class="card-row">
+        <article class="card">
+          <h3>Training History</h3>
+          <img src="training_history.png" alt="Training history" />
+          <p>Grafik ini menunjukkan nilai akurasi dan loss untuk training dan validasi.</p>
+        </article>
+        <article class="card">
+          <h3>Confusion Matrix</h3>
+          <img src="confusion_matrix.png" alt="Confusion matrix" />
+          <p>Confusion matrix memperlihatkan performa model pada tiap kelas.</p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>Contoh Gambar Dataset</h2>
+      <div class="card-row">
+        <article class="card">
+          <h3>Cane</h3>
+          <img src="sample_images/cane.jpg" alt="Cane sample" />
+        </article>
+        <article class="card">
+          <h3>Cavallo</h3>
+          <img src="sample_images/cavallo.jpg" alt="Cavallo sample" />
+        </article>
+        <article class="card">
+          <h3>Elefante</h3>
+          <img src="sample_images/elefante.jpg" alt="Elefante sample" />
+        </article>
+        <article class="card">
+          <h3>Farfalla</h3>
+          <img src="sample_images/farfalla.jpg" alt="Farfalla sample" />
+        </article>
+        <article class="card">
+          <h3>Gallina</h3>
+          <img src="sample_images/gallina.jpg" alt="Gallina sample" />
+        </article>
+        <article class="card">
+          <h3>Gatto</h3>
+          <img src="sample_images/gatto.jpg" alt="Gatto sample" />
+        </article>
+        <article class="card">
+          <h3>Mucca</h3>
+          <img src="sample_images/mucca.jpg" alt="Mucca sample" />
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>File & Kode</h2>
+      <ul>
+        <li><a href="train_cnn.py">train_cnn.py</a> - pelatihan model CNN</li>
+        <li><a href="predict.py">predict.py</a> - prediksi gambar tunggal</li>
+        <li><a href="cnn-animals.ipynb">cnn-animals.ipynb</a> - notebook analisis dan visualisasi</li>
+        <li><a href="README.md">README.md</a> - dokumentasi project</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Download Report</h2>
+      <p>Unduh paket laporan lengkap yang berisi kode utama dan hasil pelatihan.</p>
+      <a class="button secondary" href="project-report.zip">Download Report (.zip)</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>Report generated from project code and hasil pelatihan.</p>
+  </footer>
+</body>
+</html>
