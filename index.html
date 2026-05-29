@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CNN Klasifikasi Gambar - Animals Dataset</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-content">
+      <h1>CNN Klasifikasi Gambar</h1>
+      <p>Model klasifikasi gambar hewan menggunakan TensorFlow dan Keras.</p>
+      <a class="button" href="https://github.com/Mas-is/cnn-klasifikasi-gambar" target="_blank" rel="noreferrer">Lihat Repository GitHub</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <section>
+      <h2>Ringkasan Project</h2>
+      <p>Project ini melatih model CNN pada dataset gambar hewan dengan 8 kelas, yaitu: <strong>cane</strong>, <strong>cavallo</strong>, <strong>elefante</strong>, <strong>farfalla</strong>, <strong>gallina</strong>, <strong>gatto</strong>, <strong>mucca</strong>.</p>
+      <p>Model dilatih dengan arsitektur CNN yang terdiri dari beberapa blok konvolusi, pooling, batch normalization, dan dropout.</p>
+    </section>
+
+    <section>
+      <h2>Hasil Pelatihan</h2>
+      <div class="card-row">
+        <article class="card">
+          <h3>Training History</h3>
+          <img src="training_history.png" alt="Training history" />
+          <p>Grafik akurasi dan loss selama pelatihan.</p>
+        </article>
+        <article class="card">
+          <h3>Confusion Matrix</h3>
+          <img src="confusion_matrix.png" alt="Confusion matrix" />
+          <p>Hasil klasifikasi pada data validasi menunjukkan performa model untuk setiap kelas.</p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>File Penting</h2>
+      <ul>
+        <li><a href="train_cnn.py">train_cnn.py</a> - skrip pelatihan CNN</li>
+        <li><a href="cnn_model.h5">cnn_model.h5</a> - model terlatih</li>
+        <li><a href="predict.py">predict.py</a> - skrip prediksi gambar</li>
+        <li><a href="cnn-animals.ipynb">cnn-animals.ipynb</a> - notebook analisis dan visualisasi</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Cara Menjalankan</h2>
+      <ol>
+        <li>Siapkan environment Python dan pasang dependensi:</li>
+        <pre><code>pip install -r requirements.txt</code></pre>
+        <li>Latih model dengan:</li>
+        <pre><code>python train_cnn.py</code></pre>
+        <li>Jalankan prediksi gambar dengan:</li>
+        <pre><code>python predict.py dataset/gatto/1.jpeg</code></pre>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Catatan</h2>
+      <p>Pastikan folder <code>dataset/</code> berisi subfolder untuk setiap kelas. Model menggunakan ukuran input <strong>128×128</strong> piksel.</p>
+      <p>Halaman ini dapat digunakan sebagai versi GitHub Pages sederhana untuk menampilkan project Anda.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Project CNN Klasifikasi Gambar - GitHub Pages</p>
+  </footer>
+</body>
+</html>
