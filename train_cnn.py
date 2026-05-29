@@ -6,6 +6,7 @@
 # 1. IMPORT LIBRARY
 # =========================================================
 
+import json
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -483,6 +484,9 @@ history = model.fit(
 # =========================================================
 
 model.save("cnn_model.h5")
+
+with open("class_names.json", "w", encoding="utf-8") as f:
+    json.dump(CLASS_NAMES, f, ensure_ascii=False, indent=2)
 
 print("\nModel berhasil disimpan!")
 
