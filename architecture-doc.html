@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dokumentasi Arsitektur CNN</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .architecture-diagram {
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 1.5rem;
+      border-radius: 16px;
+      font-family: "Fira Code", monospace;
+      font-size: 0.9rem;
+      line-height: 1.8;
+      margin: 1.5rem 0;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08);
+    }
+
+    th, td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    th {
+      background: #4f46e5;
+      color: white;
+      font-weight: 600;
+    }
+
+    tr:hover {
+      background: #f8fafc;
+    }
+
+    .highlight {
+      background: #fef3c7;
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    .section-box {
+      background: white;
+      border-left: 4px solid #4f46e5;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08);
+    }
+
+    .section-box h3 {
+      margin-top: 0;
+      color: #4f46e5;
+    }
+
+    ul {
+      line-height: 2;
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-content">
+      <h1>Dokumentasi Arsitektur CNN</h1>
+      <p>Penjelasan desain dan alasan pemilihan setiap komponen model</p>
+      <div class="button-row">
+        <a class="button" href="index.html">Kembali ke Beranda</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section>
+      <h2>1. Deskripsi Arsitektur CNN</h2>
+      <p>Arsitektur CNN yang dirancang untuk klasifikasi gambar hewan terdiri dari <span class="highlight">3 blok konvolusi</span>, dengan struktur progresif yang meningkat secara bertahap.</p>
+      
+      <div class="architecture-diagram">
+INPUT (128×128×3)
+    ↓
+BLOCK 1: Conv2D(32) → Conv2D(32) → MaxPooling → BatchNorm → Dropout
+    ↓
+BLOCK 2: Conv2D(64) → Conv2D(64) → MaxPooling → BatchNorm → Dropout
+    ↓
+BLOCK 3: Conv2D(128) → Conv2D(128) → MaxPooling → BatchNorm → Dropout
+    ↓
+Flatten
+    ↓
+Dense(256) → Dropout(0.5)
+    ↓
+Dense(128) → Dropout(0.3)
+    ↓
+Output (num_classes) → Softmax
+      </div>
+    </section>
+
+    <section>
+      <h2>2. Komponen Arsitektur CNN yang Digunakan</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+        <div class="section-box">
+          <h3>✅ Convolution Layer</h3>
+          <p>Conv2D dengan filter dan kernel yang berbeda-beda per block</p>
+        </div>
+        <div class="section-box">
+          <h3>✅ Activation Function</h3>
+          <p>ReLU untuk hidden layers, Softmax untuk output</p>
+        </div>
+        <div class="section-box">
+          <h3>✅ Pooling Layer</h3>
+          <p>MaxPooling2D untuk mengurangi dimensi</p>
+        </div>
+        <div class="section-box">
+          <h3>✅ Flatten Layer</h3>
+          <p>Mengubah feature maps menjadi vektor</p>
+        </div>
+        <div class="section-box">
+          <h3>✅ Dense Layer</h3>
+          <p>Fully-connected layers dengan regularisasi</p>
+        </div>
+        <div class="section-box">
+          <h3>✅ Output Layer</h3>
+          <p>Softmax untuk multi-class classification</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>3. Penjelasan Pilihan Arsitektur</h2>
+
+      <h3 style="color: #4f46e5; margin-top: 2rem;">A. Jumlah Filter pada Convolution Layer</h3>
+      <table>
+        <tr>
+          <th>Block</th>
+          <th>Filter</th>
+          <th>Alasan</th>
+        </tr>
+        <tr>
+          <td><strong>BLOCK 1</strong></td>
+          <td>32 filter</td>
+          <td>Mendeteksi fitur dasar (edge, tekstur sederhana) pada input gambar 128×128. Jumlah 32 sudah cukup efisien untuk layer pertama.</td>
+        </tr>
+        <tr>
+          <td><strong>BLOCK 2</strong></td>
+          <td>64 filter</td>
+          <td>Mendeteksi fitur yang lebih kompleks (bentuk geometris). Peningkatan menjadi 64 memungkinkan model mempelajari kombinasi fitur dari layer sebelumnya.</td>
+        </tr>
+        <tr>
+          <td><strong>BLOCK 3</strong></td>
+          <td>128 filter</td>
+          <td>Mendeteksi fitur tingkat tinggi (karakteristik spesifik hewan). Peningkatan menjadi 128 memaksimalkan representasi fitur sebelum Flatten.</td>
+        </tr>
+      </table>
+      <p><strong>Alasan peningkatan progresif:</strong> Setiap layer berkurang ukuran spatial (karena pooling), tetapi meningkat kedalaman channel. Ini efisien secara komputasi dan membantu model belajar hierarki fitur.</p>
+
+      <h3 style="color: #4f46e5; margin-top: 2rem;">B. Ukuran Kernel</h3>
+      <div class="section-box">
+        <h3>Kernel yang digunakan: (3, 3)</h3>
+        <ul>
+          <li><strong>Kernel 3×3 adalah standar industri</strong> untuk CNN modern (AlexNet, VGG, ResNet menggunakan 3×3)</li>
+          <li><strong>Efisiensi komputasi:</strong> Kernel 3×3 lebih cepat dibanding kernel besar seperti 5×5 atau 7×7</li>
+          <li><strong>Receptive field yang tepat:</strong> Untuk gambar 128×128, kernel 3×3 dapat menangkap edge dan tekstur lokal dengan baik</li>
+          <li><strong>Padding 'same':</strong> Mempertahankan dimensi spatial setelah konvolusi, memastikan informasi tepi tidak hilang</li>
+        </ul>
+      </div>
+
+      <h3 style="color: #4f46e5; margin-top: 2rem;">C. Jenis Pooling</h3>
+      <div class="section-box">
+        <h3>Pooling yang digunakan: MaxPooling2D(2, 2)</h3>
+        <ul>
+          <li><strong>Max Pooling:</strong> Mengambil nilai maksimum dalam window 2×2, mempertahankan fitur paling dominan</li>
+          <li><strong>Window 2×2:</strong> Mengurangi dimensi spatial sebesar 50% (128 → 64 → 32 → 16), mengurangi beban komputasi</li>
+          <li><strong>Invariansi translasi:</strong> Max pooling membuat model lebih robust terhadap pergeseran kecil dalam gambar</li>
+          <li><strong>Pemilihan 2×2:</strong> Standard untuk CNN, tidak terlalu agresif (seperti 4×4) sehingga informasi spasial tetap terjaga</li>
+        </ul>
+      </div>
+
+      <h3 style="color: #4f46e5; margin-top: 2rem;">D. Fungsi Aktivasi</h3>
+      <table>
+        <tr>
+          <th>Layer</th>
+          <th>Aktivasi</th>
+          <th>Alasan</th>
+        </tr>
+        <tr>
+          <td><strong>Hidden Layers</strong></td>
+          <td>ReLU</td>
+          <td>ReLU(x) = max(0, x) mengatasi vanishing gradient, komputasi efisien, dan memungkinkan non-linearity</td>
+        </tr>
+        <tr>
+          <td><strong>Output Layer</strong></td>
+          <td>Softmax</td>
+          <td>Mengkonversi output ke probability distribution untuk multi-class classification</td>
+        </tr>
+      </table>
+
+      <h3 style="color: #4f46e5; margin-top: 2rem;">E. Jumlah Neuron pada Output Layer</h3>
+      <div class="section-box">
+        <h3>Jumlah neuron: num_classes (8 kelas)</h3>
+        <p>Dataset terdiri dari 8 kelas hewan: <strong>cane, cavallo, elefante, farfalla, gallina, gatto, mucca</strong></p>
+        <ul>
+          <li><strong>Satu neuron per kelas</strong> adalah standar untuk multi-class classification</li>
+          <li><strong>8 output neurons</strong> karena ada 8 kategori hewan dalam dataset</li>
+          <li><strong>Softmax aktivasi</strong> mengubah 8 output menjadi probabilitas yang jumlahnya = 1</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>4. Komponen Tambahan</h2>
+
+      <h3 style="color: #4f46e5; margin-top: 1.5rem;">Batch Normalization</h3>
+      <div class="section-box">
+        <ul>
+          <li><strong>Tujuan:</strong> Normalisasi input setiap layer agar training lebih stabil</li>
+          <li><strong>Manfaat:</strong> Mengurangi internal covariate shift, mempercepat konvergensi</li>
+        </ul>
+      </div>
+
+      <h3 style="color: #4f46e5; margin-top: 1.5rem;">Dropout</h3>
+      <table>
+        <tr>
+          <th>Layer</th>
+          <th>Dropout Rate</th>
+          <th>Alasan</th>
+        </tr>
+        <tr>
+          <td>Conv Block 1-2</td>
+          <td>0.25</td>
+          <td>Regularisasi ringan di awal network</td>
+        </tr>
+        <tr>
+          <td>Conv Block 3</td>
+          <td>0.40</td>
+          <td>Regularisasi lebih kuat di layer dalam</td>
+        </tr>
+        <tr>
+          <td>Dense 1</td>
+          <td>0.50</td>
+          <td>Regularisasi agresif untuk mengurangi overfitting</td>
+        </tr>
+        <tr>
+          <td>Dense 2</td>
+          <td>0.30</td>
+          <td>Regularisasi sedang sebelum output</td>
+        </tr>
+      </table>
+      <p style="margin-top: 1rem;"><strong>Tujuan:</strong> Mencegah overfitting dengan menonaktifkan neuron secara random selama training</p>
+    </section>
+
+    <section>
+      <h2>5. Ringkasan Keputusan Desain</h2>
+      <table>
+        <tr>
+          <th>Aspek</th>
+          <th>Pilihan</th>
+          <th>Alasan Utama</th>
+        </tr>
+        <tr>
+          <td><strong>Jumlah Block</strong></td>
+          <td>3 block</td>
+          <td>Keseimbangan antara kedalaman network dan efisiensi komputasi</td>
+        </tr>
+        <tr>
+          <td><strong>Filter progresif</strong></td>
+          <td>32 → 64 → 128</td>
+          <td>Hierarki fitur dari sederhana ke kompleks</td>
+        </tr>
+        <tr>
+          <td><strong>Kernel size</strong></td>
+          <td>3×3</td>
+          <td>Standard, efisien, receptive field tepat</td>
+        </tr>
+        <tr>
+          <td><strong>Pooling</strong></td>
+          <td>Max, 2×2</td>
+          <td>Mengurangi dimensi sambil mempertahankan fitur penting</td>
+        </tr>
+        <tr>
+          <td><strong>Hidden activation</strong></td>
+          <td>ReLU</td>
+          <td>Mengatasi vanishing gradient, komputasi efisien</td>
+        </tr>
+        <tr>
+          <td><strong>Output activation</strong></td>
+          <td>Softmax</td>
+          <td>Multi-class probability distribution</td>
+        </tr>
+        <tr>
+          <td><strong>Regularisasi</strong></td>
+          <td>Batch Norm + Dropout</td>
+          <td>Meningkatkan generalisasi dan mencegah overfitting</td>
+        </tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>6. Kesimpulan</h2>
+      <div class="section-box">
+        <p>Arsitektur CNN yang dirancang ini merupakan <strong>CNN sederhana namun efektif</strong> untuk klasifikasi gambar hewan 128×128 piksel dengan 8 kelas. Setiap keputusan desain dibuat berdasarkan pertimbangan trade-off antara <strong>akurasi</strong>, <strong>efisiensi komputasi</strong>, dan <strong>generalisasi model</strong>.</p>
+      </div>
+    </section>
+
+    <section style="text-align: center; margin-top: 3rem;">
+      <a class="button" href="index.html">Kembali ke Beranda</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>Dokumentasi Arsitektur CNN - Tugas Diskusi Machine Learning</p>
+  </footer>
+</body>
+</html>

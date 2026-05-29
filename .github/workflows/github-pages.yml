@@ -19,7 +19,7 @@ jobs:
       - name: Prepare Pages site
         run: |
           mkdir -p public/sample_images
-          cp index.html style.css report.html project-report.zip DOKUMENTASI_ARSITEKTUR_CNN.md training_history.png confusion_matrix.png public/
+          cp index.html style.css report.html architecture-doc.html project-report.zip DOKUMENTASI_ARSITEKTUR_CNN.md training_history.png confusion_matrix.png public/
           cp sample_images/*.jpg public/sample_images/
 
       - name: Configure GitHub Pages
